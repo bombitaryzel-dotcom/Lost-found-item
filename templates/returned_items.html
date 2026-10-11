@@ -1,0 +1,4 @@
+{% extends 'base.html' %}{% block title %}Recently Returned{% endblock %}{% block content %}
+<section class="page-heading"><span class="eyebrow">Campus reunification</span><h1>Recently returned items</h1><p>These records show successful returns without exposing claimant contact details.</p></section>
+<div class="item-grid">{% for item in items %}<article class="item-card returned-card"><div class="item-body"><span class="status returned">Returned</span><h3>{{ item.title }}</h3><p>{{ item.public_description|truncate(130) }}</p><small>Reference {{ item.public_reference }}</small></div></article>{% else %}<div class="empty">No returned items have been recorded yet.</div>{% endfor %}</div>
+{% endblock %}

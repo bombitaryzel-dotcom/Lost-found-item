@@ -1,0 +1,5 @@
+<article class="item-card">
+  <a class="item-image" href="{{ url_for('item_detail', reference=item.public_reference) }}">{% if item.image_name %}<img src="{{ url_for('uploaded_file', name=item.image_name) }}" alt="Photo of {{ item.title }}">{% else %}<span>⌕</span>{% endif %}<b class="pill {{ item.report_type }}">{{ item.report_type|title }}</b></a>
+  <div class="item-body"><small>{{ item.category_name or 'Uncategorized' }} · {{ item.event_date }}</small><h3>{{ item.title }}</h3><p>{{ item.public_description|truncate(105) }}</p><div><span>{{ item.location_name or 'Location not listed' }}</span><a href="{{ url_for('item_detail', reference=item.public_reference) }}">Details →</a></div></div>
+</article>
+

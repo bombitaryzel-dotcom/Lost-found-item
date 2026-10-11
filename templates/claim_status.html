@@ -1,0 +1,2 @@
+{% extends 'base.html' %}{% block title %}Claim Status{% endblock %}{% block content %}<section class="result-card"><span class="eyebrow">Claim reference</span><h1>{{ claim.claim_reference }}</h1><p>Your claim for <strong>{{ claim.title }}</strong> is <span class="status {{ claim.status }}">{{ claim.status|pretty_status }}</span>.</p><p>Save this reference and present it to Lost and Found staff when requested.</p><a class="button primary" href="{{ url_for('item_detail', reference=claim.public_reference) }}">View Item</a></section>{% endblock %}
+

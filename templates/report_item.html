@@ -1,0 +1,15 @@
+{% extends 'base.html' %}{% block title %}Report an Item{% endblock %}
+{% block content %}
+<section class="page-heading"><span class="eyebrow">Public reporting</span><h1>Report a lost or found item</h1><p>Your report will remain private until staff reviews and approves it. Contact and verification details are never shown publicly.</p></section>
+<form class="form-card two-column" method="post" enctype="multipart/form-data"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <div class="full choice-row"><label class="choice"><input type="radio" name="report_type" value="lost" required><span><b>I lost an item</b><small>Help me find something missing</small></span></label><label class="choice"><input type="radio" name="report_type" value="found" required><span><b>I found an item</b><small>Help return it to the owner</small></span></label></div>
+  <label>Item name<input name="title" maxlength="100" required placeholder="Example: Black scientific calculator"></label><label>Category<select name="category_id"><option value="">Choose a category</option>{% for c in categories %}<option value="{{ c.id }}">{{ c.name }}</option>{% endfor %}</select></label>
+  <label>Date lost or found<input type="date" name="event_date" required></label><label>Location<select name="location_id"><option value="">Choose a location</option>{% for l in locations %}<option value="{{ l.id }}">{{ l.name }}</option>{% endfor %}</select></label>
+  <label class="full">Public description<textarea name="public_description" maxlength="800" required placeholder="Describe the color, type, and general appearance. Do not reveal every unique detail."></textarea><small>This may appear publicly after approval.</small></label>
+  <label class="full">Private verification detail<textarea name="private_details" maxlength="800" required placeholder="Add a detail only the real owner should know."></textarea><small>Visible only to authorized staff.</small></label>
+  <label>Your name<input name="reporter_name" maxlength="100" required></label><label>Phone number or email<input name="reporter_contact" maxlength="150" required></label>
+  <label class="full file-input">Item photo (optional)<input type="file" name="image" accept=".png,.jpg,.jpeg,.webp"><small>Maximum 5 MB. Avoid including IDs or personal information in the photo.</small></label>
+  <div class="full form-actions"><button class="button primary" type="submit">Submit for Staff Review</button><a class="button ghost" href="{{ url_for('index') }}">Cancel</a></div>
+</form>
+{% endblock %}
+
