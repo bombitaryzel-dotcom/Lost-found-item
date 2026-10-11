@@ -1,0 +1,8 @@
+{% extends 'base.html' %}{% block title %}Categories and Locations{% endblock %}
+{% block content %}
+<section class="dashboard-head"><div><span class="eyebrow">System configuration</span><h1>Categories and locations</h1><p>Add school-specific choices without changing the source code.</p></div></section>
+<div class="taxonomy-grid">
+  <section class="panel"><h2>Item categories</h2><form class="inline-form" method="post"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><input type="hidden" name="kind" value="category"><input name="name" required maxlength="80" placeholder="New category"><button class="button primary">Add</button></form><div class="tag-list">{% for row in categories %}<span>{{ row.name }} <b>{{ row.usage_count }}</b></span>{% endfor %}</div></section>
+  <section class="panel"><h2>Campus locations</h2><form class="inline-form" method="post"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><input type="hidden" name="kind" value="location"><input name="name" required maxlength="80" placeholder="New school location"><button class="button primary">Add</button></form><div class="tag-list">{% for row in locations %}<span>{{ row.name }} <b>{{ row.usage_count }}</b></span>{% endfor %}</div></section>
+</div>
+{% endblock %}

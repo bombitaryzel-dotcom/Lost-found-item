@@ -1,0 +1,22 @@
+{% extends 'base.html' %}{% block title %}Home{% endblock %}
+{% block content %}
+<section class="campus-banner"><span>{{ school_name }}</span><strong>Official Lost and Found Portal</strong><small>{{ school_location }}</small></section>
+<section class="hero">
+  <div class="hero-copy"><span class="eyebrow">{{ school_name }} Campus Item Assistance</span><h1>Lost something?<br><em>Let’s help it find its way home.</em></h1><p>Browse verified listings, submit a report, or securely claim an item through the St. Francis Xavier College Lost and Found Office.</p><div class="actions"><a class="button primary" href="{{ url_for('report_item') }}">Report Lost or Found Item</a><a class="button secondary" href="{{ url_for('public_items') }}">Browse Verified Items</a><a class="button ghost" href="{{ url_for('check_status') }}">Check My Reference</a></div></div>
+  <div class="hero-art"><div class="orbit one"></div><div class="orbit two"></div><img src="{{ url_for('static', filename='img/sfxc-crest.jpg') }}" alt="St. Francis Xavier College crest"><div class="school-ribbon"><strong>ST. FRANCIS XAVIER COLLEGE</strong><small>SAN FRANCISCO • AGUSAN DEL SUR</small></div><span class="floating-card card-a">✓ Staff verified</span><span class="floating-card card-b">⌁ QR tracked</span></div>
+</section>
+<section class="campus-values" aria-label="Campus portal values">
+  <div class="value-mark">SFXC</div>
+  <div><span class="eyebrow">A campus promise</span><h2>Every report deserves a clear next step.</h2></div>
+  <p>Designed for the St. Francis Xavier College community: easy to browse, safe to claim, and simple for staff to verify.</p>
+  <div class="value-list"><span>✦ Verified listings</span><span>✦ QR-ready records</span><span>✦ Staff-guided claims</span></div>
+</section>
+<section class="stats-grid">
+  <article><span>Lost reports</span><strong>{{ stats.lost_count or 0 }}</strong><small>Currently active</small></article>
+  <article><span>Found items</span><strong>{{ stats.found_count or 0 }}</strong><small>Ready to match</small></article>
+  <article><span>Returned</span><strong>{{ stats.returned_count or 0 }}</strong><small>Successful releases</small></article>
+</section>
+<section class="section-head"><div><span class="eyebrow">Recently verified</span><h2>Latest item listings</h2></div><a href="{{ url_for('public_items') }}">View all →</a></section>
+<div class="item-grid">{% for item in recent %}{% include '_item_card.html' %}{% else %}<div class="empty">No approved items yet. Public submissions will appear here after staff approval.</div>{% endfor %}</div>
+<section class="steps"><div><span class="eyebrow">Simple and secure</span><h2>How it works</h2></div><article><b>01</b><h3>Submit</h3><p>Describe the lost or found item and provide one private ownership detail.</p></article><article><b>02</b><h3>Verify</h3><p>Staff reviews the report before any safe information appears publicly.</p></article><article><b>03</b><h3>Reunite</h3><p>Claims are checked against private details before the item is released.</p></article></section>
+{% endblock %}

@@ -1,0 +1,2 @@
+{% extends 'base.html' %}{% block title %}Error {{ code }}{% endblock %}{% block content %}<section class="result-card"><span class="error-code">{{ code }}</span><h1>{{ message }}</h1><p>Please return to the home page or try again.</p><a class="button primary" href="{{ url_for('index') }}">Return Home</a></section>{% endblock %}
+

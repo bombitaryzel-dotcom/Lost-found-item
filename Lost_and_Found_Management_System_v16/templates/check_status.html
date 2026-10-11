@@ -1,0 +1,8 @@
+{% extends 'base.html' %}{% block title %}Check Status{% endblock %}
+{% block content %}
+<section class="status-lookup">
+  <div><span class="eyebrow">Reference tracker</span><h1>Check your report or claim</h1><p>Enter the reference provided after submitting a report or ownership claim. No account is required.</p><ul><li>Item reports begin with <code>LF-</code></li><li>Claims begin with <code>CLM-</code></li></ul></div>
+  <form class="form-card" method="post"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><label>Reference number<input name="reference" required maxlength="30" placeholder="LF-2026-123456 or CLM-123456" autocomplete="off"></label><button class="button primary">Check Status</button><small>Contact details and private ownership information are never displayed here.</small></form>
+</section>
+{% endblock %}
+

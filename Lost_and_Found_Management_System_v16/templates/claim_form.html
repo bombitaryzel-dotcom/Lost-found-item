@@ -1,0 +1,14 @@
+{% extends 'base.html' %}{% block title %}Claim {{ item.title }}{% endblock %}
+{% block content %}
+<a class="back-link" href="{{ url_for('item_detail', reference=item.public_reference) }}">← Back to item</a>
+<section class="page-heading"><span class="eyebrow">Simple 3-step claim</span><h1>Claim this item</h1><p>You do not need an account. Complete the three short steps below so Lost and Found staff can verify that the item belongs to you.</p></section>
+<div class="claim-steps"><article class="active"><b>1</b><strong>Identify yourself</strong><span>Tell staff how to contact you.</span></article><article><b>2</b><strong>Show your ID</strong><span>Give an ID type and number.</span></article><article><b>3</b><strong>Prove ownership</strong><span>Share a private detail only the owner knows.</span></article></div>
+<form class="form-card claim-form" method="post"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><div class="claim-item-summary"><span class="pill {{ item.report_type }}">{{ item.report_type|title }} item</span><strong>{{ item.title }}</strong><code>{{ item.public_reference }}</code></div>
+  <label><span>Step 1 — Your full name</span><input name="claimant_name" required maxlength="100" placeholder="Example: Juan Dela Cruz"></label>
+  <label><span>Step 1 — Phone number or email</span><input name="contact" required maxlength="150" placeholder="How staff can contact you"></label>
+  <label><span>Step 2 — ID type and number</span><input name="identification" required maxlength="150" placeholder="Example: Student ID 2026-001"></label>
+  <label><span>Step 3 — Proof of ownership</span><textarea name="proof_description" required maxlength="1200" placeholder="Describe a unique mark, hidden content, serial detail, or where you last used the item."></textarea><small>Do not include passwords, PINs, or banking information.</small></label>
+  <div class="claim-expectation"><strong>What happens next?</strong><span>Staff compares your answer with confidential item details. If it matches, they approve the claim and arrange the release of the item.</span></div>
+  <div class="form-actions"><button class="button primary">Submit Claim for Review</button><a class="button ghost" href="{{ url_for('item_detail', reference=item.public_reference) }}">Cancel</a></div>
+</form>
+{% endblock %}

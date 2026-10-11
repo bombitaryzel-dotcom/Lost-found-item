@@ -1,0 +1,15 @@
+{% extends 'base.html' %}{% block title %}Direct Post{% endblock %}
+{% block content %}
+<a class="back-link" href="{{ url_for('dashboard') }}">← Back to dashboard</a>
+<section class="page-heading"><span class="eyebrow">Administrator publishing</span><h1>Post an item directly</h1><p>Use this for an official school-office record. Direct posts are published immediately and marked as posted by the administrator.</p></section>
+<form class="form-card two-column retro-post-form" method="post" enctype="multipart/form-data"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <div class="full choice-row"><label class="choice"><input type="radio" name="report_type" value="lost" required><span><b>Lost item</b><small>Post an item reported missing</small></span></label><label class="choice"><input type="radio" name="report_type" value="found" required><span><b>Found item</b><small>Post an item held by the office</small></span></label></div>
+  <label>Item name<input name="title" maxlength="100" required placeholder="Example: Black umbrella"></label><label>Category<select name="category_id"><option value="">Choose a category</option>{% for c in categories %}<option value="{{ c.id }}">{{ c.name }}</option>{% endfor %}</select></label>
+  <label>Date lost or found<input type="date" name="event_date" required></label><label>Campus location<select name="location_id"><option value="">Choose a location</option>{% for l in locations %}<option value="{{ l.id }}">{{ l.name }}</option>{% endfor %}</select></label>
+  <label class="full">Public description<textarea name="public_description" maxlength="800" required placeholder="Write only safe details that may be displayed publicly."></textarea><small>Do not include private contact details or secret ownership clues.</small></label>
+  <label class="full private-field">Private verification detail<textarea name="private_details" maxlength="800" required placeholder="A detail staff can use to verify the real owner."></textarea><small>Only authorized staff can view this.</small></label>
+  <label class="full file-input">Item photo (optional)<input type="file" name="image" accept=".png,.jpg,.jpeg,.webp"><small>Maximum 5 MB. Images are checked and cleaned before storage.</small></label>
+  <div class="full direct-post-warning">Direct posting publishes immediately. Confirm that the report has been checked by the Lost and Found Office.</div>
+  <div class="full form-actions"><button class="button primary" type="submit">Publish Official Item</button><a class="button ghost" href="{{ url_for('dashboard') }}">Cancel</a></div>
+</form>
+{% endblock %}

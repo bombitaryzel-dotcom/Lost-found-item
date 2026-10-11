@@ -1,0 +1,7 @@
+{% extends 'base.html' %}{% block title %}Browse Items{% endblock %}
+{% block content %}
+<section class="page-heading"><span class="eyebrow">Public listings</span><h1>Browse verified items</h1><p>Only staff-approved information is shown. Private ownership details and reporter contacts remain confidential.</p></section>
+<form class="filter-bar" method="get"><input name="q" value="{{ request.args.get('q','') }}" placeholder="Search item, description, or reference"><select name="type"><option value="">Lost and found</option><option value="lost" {% if request.args.get('type')=='lost' %}selected{% endif %}>Lost only</option><option value="found" {% if request.args.get('type')=='found' %}selected{% endif %}>Found only</option></select><select name="category"><option value="">All categories</option>{% for c in categories %}<option value="{{ c.id }}" {% if request.args.get('category')==c.id|string %}selected{% endif %}>{{ c.name }}</option>{% endfor %}</select><button class="button primary">Search</button></form>
+<div class="item-grid">{% for item in items %}{% include '_item_card.html' %}{% else %}<div class="empty">No items match those filters.</div>{% endfor %}</div>
+{% endblock %}
+
